@@ -159,12 +159,12 @@
             </div>
 
             <button type="submit" class="btn btn-gradient mt-2 mb-3">
-                MASUK SEKARANG
+                MASUK
             </button>
         </form>
 
         <div class="footer-link">
-            Belum punya akun? <a href="/register">Daftar Sekarang</a>
+            Belum punya akun? <a href="/register">Daftar</a>
         </div>
     </div>
 </div>

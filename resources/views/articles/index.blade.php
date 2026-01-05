@@ -14,13 +14,13 @@
             <div class="col-md-4">
                 <input type="text" name="search" value="{{ request('search') }}"
                        class="form-control"
-                       placeholder="Cari judul">
+                       placeholder="Cari berdasarkan judul atau penulis">
             </div>
             
             <div class="col-md-3">
                 <input type="text" name="category" value="{{ request('category') }}"
                        class="form-control"
-                       placeholder="Filter">
+                       placeholder="Filter kategori">
             </div>
 
             <div class="col-md-2">
@@ -121,7 +121,7 @@
     </div>
 </div>
 
-<!-- Modal Konfirmasi Hapus -->
+<!-- Konfirmasi Hapus -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
