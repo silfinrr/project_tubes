@@ -157,7 +157,7 @@
 <footer class="text-center">
     <div class="container">
         <small class="fw-medium">
-            &copy; 2025 Sistem Artikel Digital. Dibuat dengan <i class="bi bi-heart-fill text-danger"></i> oleh Tim Proyek.
+            Tugas Besar Sistem Artikel Digital. Dibuat oleh Kelompok 3.
         </small>
     </div>
 </footer>
