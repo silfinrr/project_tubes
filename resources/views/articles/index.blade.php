@@ -14,13 +14,13 @@
             <div class="col-md-4">
                 <input type="text" name="search" value="{{ request('search') }}"
                        class="form-control"
-                       placeholder="Cari judul atau penulis...">
+                       placeholder="Cari judul">
             </div>
             
             <div class="col-md-3">
                 <input type="text" name="category" value="{{ request('category') }}"
                        class="form-control"
-                       placeholder="Filter Kategori...">
+                       placeholder="Filter">
             </div>
 
             <div class="col-md-2">

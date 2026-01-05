@@ -10,17 +10,17 @@ use Illuminate\Support\Facades\Storage;
 class ArticleController extends Controller
 {
     // Menampilkan daftar artikel (Halaman Utama)
-    // Menampilkan daftar artikel (Halaman Utama)
+    // Ini buat nampilin daftar artikel di halaman utama ya
     public function index(Request $request)
     {
         $search = $request->search; // Judul atau Penulis
         $category = $request->category; // Kategori
         $year = $request->year; // Tahun Publikasi
 
-        // Query artikel
+        // Siapin query buat ambil data artikel
         $articles = Article::query();
 
-        // Filter berdasarkan pencarian (Judul / Penulis)
+        // Kalau ada yang nyari judul atau penulis, filter di sini
         if ($search) {
             $articles->where(function($q) use ($search) {
                 $q->where('judul', 'like', "%$search%")
@@ -46,7 +46,7 @@ class ArticleController extends Controller
     // Menampilkan form tambah artikel
     public function create()
     {
-        // Hanya admin yang boleh akses
+        // Eits, cuma admin yang boleh masuk sini ya
         if (Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak memiliki akses.');
         }
@@ -54,14 +54,14 @@ class ArticleController extends Controller
         return view('articles.create');
     }
 
-    // Menyimpan data artikel baru ke database
+    // Proses simpan artikel baru ke database
     public function store(Request $request)
     {
         if (Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak memiliki akses.');
         }
 
-        // Validasi input
+        // Cek kelengkapan datanya dulu sebelum disimpen
         $request->validate([
             'judul' => 'required',
             'abstrak' => 'required',
@@ -82,7 +82,7 @@ class ArticleController extends Controller
 
         $data = $request->all();
 
-        // Proses upload file
+        // Kalau ada filenya, upload dulu ke storage
         if ($request->hasFile('file')) {
             $filePath = $request->file('file')->store('articles', 'public');
             $data['file_path'] = $filePath;
@@ -103,14 +103,14 @@ class ArticleController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    // Mengupdate data artikel di database
+    // Update data artikel yang udah ada
     public function update(Request $request, Article $article)
     {
         if (Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak memiliki akses.');
         }
 
-        // Validasi input update
+        // Validasi lagi, siapa tau ada yang kosong
         $request->validate([
             'judul' => 'required',
             'abstrak' => 'required',
@@ -132,7 +132,7 @@ class ArticleController extends Controller
 
         // Cek jika ada file baru yang diupload
         if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
+            // File lama kita buang dulu kalau user upload yang baru
             if ($article->file_path && Storage::disk('public')->exists($article->file_path)) {
                 Storage::disk('public')->delete($article->file_path);
             }
@@ -147,14 +147,14 @@ class ArticleController extends Controller
         return redirect('/articles')->with('success', 'Artikel berhasil diperbarui');
     }
 
-    // Menghapus artikel dan filenya
+    // Hapus artikel beserta file-filenya
     public function destroy(Article $article)
     {
         if (Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak memiliki akses.');
         }
 
-        // Hapus file fisik dari storage
+        // Bersihin file aslinya dari storage biar gak menu-menuhin server
         if ($article->file_path && Storage::disk('public')->exists($article->file_path)) {
             Storage::disk('public')->delete($article->file_path);
         }
@@ -164,7 +164,7 @@ class ArticleController extends Controller
         return redirect('/articles')->with('success', 'Artikel berhasil dihapus');
     }
 
-    // Menampilkan detail artikel
+    // Nampilin detail artikel biar bisa dibaca lengkap
     public function show(Article $article)
     {
         return view('articles.show', compact('article'));

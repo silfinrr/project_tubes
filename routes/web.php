@@ -4,22 +4,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 
-// Rute untuk Login dan Logout
+// Ini jalur buat masuk (Login) sama keluar (Logout)
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-// Rute untuk Registrasi (Daftar Akun)
+// Kalau mau daftar akun baru, lewat sini jalurnya
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'store']);
 
-// Redirect halaman utama ke daftar artikel
+// Kalau buka halaman utama, langsung oper ke daftar artikel aja
 Route::get('/', function () {
     return redirect('/articles');
 });
 
-// Grup rute yang membutuhkan login (Autentikasi)
+// Nah, yang ada di dalam grup ini cuma bisa diakses kalau udah login ya
 Route::middleware('auth')->group(function () {
-    // Resource untuk CRUD 
+    // Resource buat ngurusin CRUD Artikel (Create, Read, Update, Delete)
     Route::resource('articles', ArticleController::class);
 });

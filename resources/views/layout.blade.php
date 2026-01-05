@@ -5,13 +5,13 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #fff0f5; /* pink pastel */
+    background: #980838; /* pink pastel */
 }
 
 .container {
     width: 75%;
     margin: 40px auto;
-    background: #ffffff;
+    background: #760c0c;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(233, 30, 99, 0.12);

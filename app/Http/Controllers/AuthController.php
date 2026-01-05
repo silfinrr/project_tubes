@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Menampilkan halaman login
+    // Tampilin halaman login dong
     public function login()
     {
         return view('auth.login');
     }
 
-    // Proses autentikasi user
+    // Nah, ini proses cek apakah user valid atau enggak
     public function authenticate(Request $request)
     {
-        // Validasi input login
+        // Cek dulu, email sama passwordnya diisi gak?
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -28,25 +28,25 @@ class AuthController extends Controller
             'password.required' => 'Password wajib diisi.'
         ]);
 
-        // Coba login dengan data yang diberikan
+        // Gas login pake data yang udah diinput
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('/articles');
         }
 
-        // Jika login gagal
+        // Waduh, gagal login nih. Balikin ke halaman login lagi
         return back()->withErrors([
             'email' => 'Email atau password salah.'
         ]);
     }
 
-    // Menampilkan halaman register
+    // Tampilin form buat daftar akun baru
     public function register()
     {
         return view('auth.register');
     }
 
-    // Proses penyimpanan user baru
+    // Proses simpan data user baru biar resmi jadi member
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -69,13 +69,13 @@ class AuthController extends Controller
             'role' => 'user' // Default role sebagai user biasa
         ]);
 
-        // Login otomatis setelah register
+        // Abis daftar langsung login otomatis, biar praktis
         Auth::login($user);
 
         return redirect('/articles')->with('success', 'Akun berhasil dibuat! Selamat datang.');
     }
 
-    // Proses logout
+    // Oke logout dulu, bersihin session
     public function logout(Request $request)
     {
         Auth::logout();
