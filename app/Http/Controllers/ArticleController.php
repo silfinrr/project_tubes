@@ -46,7 +46,7 @@ class ArticleController extends Controller
     // Menampilkan form tambah artikel
     public function create()
     {
-        // Eits, cuma admin yang boleh masuk sini ya
+    
         if (Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak memiliki akses.');
         }
@@ -61,14 +61,14 @@ class ArticleController extends Controller
             abort(403, 'Anda tidak memiliki akses.');
         }
 
-        // Cek kelengkapan datanya dulu sebelum disimpen
+        
         $request->validate([
             'judul' => 'required',
             'abstrak' => 'required',
             'kategori' => 'required',
             'penulis' => 'required',
             'tanggal_publikasi' => 'required',
-            'file' => 'required|mimes:pdf|max:5120' // Maksimal 5MB
+            'file' => 'required|mimes:pdf|max:5120' 
         ], [
             'judul.required' => 'Judul artikel wajib diisi.',
             'abstrak.required' => 'Abstrak/Deskripsi wajib diisi.',
@@ -82,7 +82,7 @@ class ArticleController extends Controller
 
         $data = $request->all();
 
-        // Kalau ada filenya, upload dulu ke storage
+    
         if ($request->hasFile('file')) {
             $filePath = $request->file('file')->store('articles', 'public');
             $data['file_path'] = $filePath;
@@ -103,14 +103,14 @@ class ArticleController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    // Update data artikel yang udah ada
+    
     public function update(Request $request, Article $article)
     {
         if (Auth::user()->role !== 'admin') {
             abort(403, 'Anda tidak memiliki akses.');
         }
 
-        // Validasi lagi, siapa tau ada yang kosong
+        
         $request->validate([
             'judul' => 'required',
             'abstrak' => 'required',
@@ -154,7 +154,7 @@ class ArticleController extends Controller
             abort(403, 'Anda tidak memiliki akses.');
         }
 
-        // Bersihin file aslinya dari storage biar gak menu-menuhin server
+    
         if ($article->file_path && Storage::disk('public')->exists($article->file_path)) {
             Storage::disk('public')->delete($article->file_path);
         }
@@ -164,7 +164,7 @@ class ArticleController extends Controller
         return redirect('/articles')->with('success', 'Artikel berhasil dihapus');
     }
 
-    // Nampilin detail artikel biar bisa dibaca lengkap
+    
     public function show(Article $article)
     {
         return view('articles.show', compact('article'));

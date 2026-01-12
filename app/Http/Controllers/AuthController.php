@@ -46,7 +46,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    // Proses simpan data user baru biar resmi jadi member
+    
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -69,13 +69,13 @@ class AuthController extends Controller
             'role' => 'user' // Default role sebagai user biasa
         ]);
 
-        // Abis daftar langsung login otomatis, biar praktis
+        
         Auth::login($user);
 
         return redirect('/articles')->with('success', 'Akun berhasil dibuat! Selamat datang.');
     }
 
-    // Oke logout dulu, bersihin session
+    
     public function logout(Request $request)
     {
         Auth::logout();
