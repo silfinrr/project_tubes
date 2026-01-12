@@ -52,7 +52,7 @@
     <label class="form-label">Upload File PDF</label>
     <input type="file" class="form-control @error('file') is-invalid @enderror" 
            name="file" accept=".pdf">
-    @error('file') <span class="text-danger">{{ $message }}</span> @enderror
+    @error('file') <span class="text-danger small">{{ $message }}</span> @enderror
 </div>
 
 <button class="btn btn-pink">Simpan</button>

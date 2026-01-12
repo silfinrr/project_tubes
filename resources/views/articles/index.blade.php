@@ -72,7 +72,9 @@
                 <th>Penulis</th>
                 <th>Tanggal</th>
                 <th>File</th>
+                @if(auth()->check() && auth()->user()->role === 'admin')
                 <th>Aksi</th>
+                @endif
             </tr>
 
             @forelse($articles as $article)
@@ -86,10 +88,8 @@
                          Detail & Preview
                      </a>
                 </td>
+                @if(auth()->check() && auth()->user()->role === 'admin')
                 <td>
-
-                    @auth
-                    @if(auth()->user()->role === 'admin')
                     <a href="/articles/{{ $article->id }}/edit"
                        class="btn btn-sm btn-pink">
                         Edit
@@ -99,16 +99,12 @@
                             onclick="confirmDelete({{ $article->id }})">
                         Hapus
                     </button>
-                    @else
-                    <span class="text-muted">Lihat saja</span>
-                    @endif
-                    @endauth
-
                 </td>
+                @endif
             </tr>
             @empty
             <tr>
-                <td colspan="6" class="text-center">
+                <td colspan="{{ (auth()->check() && auth()->user()->role === 'admin') ? 6 : 5 }}" class="text-center">
                     Data artikel belum tersedia
                 </td>
             </tr>

@@ -18,16 +18,16 @@ class DatabaseSeeder extends Seeder
         // Admin Account
         User::create([
             'name' => 'Administrator',
-            'email' => 'admin@gmail.com',
-            'password' => 'password', // Password otomatis di-hash oleh model cast
+            'email' => 'silfinh@gmail.com',
+            'password' => 'Passsilfi123',
             'role' => 'admin',
         ]);
 
         // User Account
         User::create([
-            'name' => 'Pengguna Biasa',
-            'email' => 'user@gmail.com',
-            'password' => 'password',
+            'name' => 'Siti Rahmawati',
+            'email' => 'rahma@gmail.com',
+            'password' => 'Passrahma123',
             'role' => 'user',
         ]);
     }

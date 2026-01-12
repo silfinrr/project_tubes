@@ -16,7 +16,7 @@
             color: white;
             border: none;
         }
-        .btn-pink:hover { background-color: #e7549c; }
+        .btn-pink:hover { background-color: #b20257ff; }
     </style>
 </head>
 <body>
